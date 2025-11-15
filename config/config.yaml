@@ -1,0 +1,47 @@
+# Bitcoin Quant Trader Configuration
+
+exchange:
+  name: binance
+  sandbox: true  # Use testnet for testing
+  rate_limit: true
+
+trading:
+  symbol: BTC/USDT
+  timeframe: 1h
+  capital: 10000
+  mode: paper  # paper or live
+
+risk_management:
+  max_position_size: 0.1  # Maximum 10% of capital per trade
+  stop_loss_pct: 0.02     # 2% stop loss
+  take_profit_pct: 0.04   # 4% take profit
+  max_daily_loss: 0.05    # 5% maximum daily loss
+  max_open_positions: 3
+
+strategies:
+  active:
+    - trend_following
+    - momentum
+    - mean_reversion
+
+  # Strategy weights for ensemble
+  weights:
+    trend_following: 0.4
+    momentum: 0.3
+    mean_reversion: 0.3
+
+backtesting:
+  start_date: "2023-01-01"
+  end_date: "2024-12-31"
+  initial_capital: 10000
+  commission: 0.001  # 0.1% trading fee
+
+data:
+  cache_enabled: true
+  cache_dir: "./data"
+  lookback_periods: 500  # Number of candles to fetch
+
+logging:
+  level: INFO
+  file: "./logs/trader.log"
+  console: true

@@ -12,6 +12,7 @@ from .data.data_fetcher import DataFetcher
 from .data.data_storage import DataStorage
 from .strategies import TrendFollowingStrategy, MomentumStrategy, MeanReversionStrategy
 from .strategies.ml_strategy import MLStrategy
+from .strategies.abm_strategy import ABMStrategy
 from .strategies.base_strategy import BaseStrategy, Signal
 from .backtest.engine import BacktestEngine
 from .backtest.metrics import PerformanceMetrics
@@ -122,6 +123,11 @@ class QuantTrader:
 
         if 'ml_strategy' in active_strategies:
             strategies.append(MLStrategy())
+
+        if 'abm' in active_strategies:
+            # Get ABM configuration
+            abm_params = self.config.get('abm', {})
+            strategies.append(ABMStrategy(params=abm_params))
 
         return strategies
 

@@ -23,12 +23,14 @@ strategies:
     - trend_following
     - momentum
     - mean_reversion
+    - abm  # Agent-based model strategy
 
   # Strategy weights for ensemble
   weights:
-    trend_following: 0.4
-    momentum: 0.3
-    mean_reversion: 0.3
+    trend_following: 0.25
+    momentum: 0.25
+    mean_reversion: 0.2
+    abm: 0.3  # Higher weight for ABM due to sophisticated multi-agent analysis
 
 backtesting:
   start_date: "2023-01-01"
@@ -45,3 +47,22 @@ logging:
   level: INFO
   file: "./logs/trader.log"
   console: true
+
+# Agent-Based Model (ABM) Configuration
+abm:
+  # Number of agents by type
+  num_retail: 50           # Retail investors (small capital, emotional)
+  num_institutional: 10    # Institutional investors (large capital, sophisticated)
+  num_whales: 3            # Whale investors (very large capital, strategic)
+  num_algorithmic: 15      # Algorithmic traders (quantitative, unemotional)
+  num_momentum: 10         # Momentum traders (trend followers)
+  num_contrarian: 5        # Contrarian traders (counter-trend)
+
+  # Capital distribution
+  capital_distribution: realistic  # 'realistic' or 'equal'
+
+  # Signal parameters
+  signal_threshold: 0.6    # Minimum confidence (0-1) to generate trading signal
+
+  # Reproducibility
+  random_seed: 42          # Set to null for random initialization
